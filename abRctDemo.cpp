@@ -944,6 +944,8 @@ abRctDemo::retrieveChangeBlocks(PCWSTR virtualDiskPath)
 		return;
 	}
 
+    ULONG64 virtualDiskSize = virtualDiskInfo->Size.VirtualSize;
+
 	printf("Disk Infomation:\n");
 	GUID virtualDiskGuid = virtualDiskInfo->Identifier;
 	wchar_t szGUID[64] = { 0 };
@@ -962,9 +964,9 @@ abRctDemo::retrieveChangeBlocks(PCWSTR virtualDiskPath)
 	cout << "Query the changes of VirtualDisk..." << endl;
 	PCWSTR    changeTrackingId = virtualDiskInfo->ChangeTrackingState.MostRecentId;
 	ULONG64   byteOffset = 0L;
-	ULONG64   byteLength = virtualDiskInfoSize;
-	PQUERY_CHANGES_VIRTUAL_DISK_RANGE pQueryChangeRange = NULL;
-	ULONG     rangeCount = 0L;
+	ULONG64   byteLength = virtualDiskSize;
+	PQUERY_CHANGES_VIRTUAL_DISK_RANGE pQueryChangeRange[100] = NULL;
+	ULONG     rangeCount = 100L;
 	ULONG64	  processedLength = 0L;
 	openStatus = QueryChangesVirtualDisk(
 		vhdHandle,							  // A handle to the open VHD
@@ -989,10 +991,10 @@ abRctDemo::retrieveChangeBlocks(PCWSTR virtualDiskPath)
 	}
 	wprintf(L"The number of changes:%ld\n", rangeCount);
 	wprintf(L"The total number of processing bytes:%I64u\n", processedLength);
-	if (pQueryChangeRange)
+	if (unsigned int=0; i<100;i++)
 	{
-		wprintf(L"The begin offset:%I64u\n", pQueryChangeRange->ByteOffset);
-		wprintf(L"The checked length:%I64u\n", pQueryChangeRange->ByteLength);
+		wprintf(L"The begin offset:%I64u\n", pQueryChangeRange[i]->ByteOffset);
+		wprintf(L"The checked length:%I64u\n", pQueryChangeRange[i]->ByteLength);
 	}
 #endif
 
