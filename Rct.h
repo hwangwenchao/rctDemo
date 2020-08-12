@@ -1,5 +1,5 @@
-#ifndef __AB_RCT_DEMO_H__
-#define __AB_RCT_DEMO_H__
+#ifndef __RCT_H__
+#define __RCT_H__
 
 #include <windows.h>
 #include <wbemidl.h>
@@ -9,11 +9,11 @@
 
 #pragma comment(lib, "wbemuuid.lib")
 
-class abRctDemo
+class Rct
 {
 public:
-	abRctDemo();
-	~abRctDemo();
+	Rct();
+	~Rct();
 	void initComComponent();
 	void createComInstance();
 	void connectWmiNamespace();
@@ -44,4 +44,4 @@ private:
 	IWbemClassObject* m_pWbemClassObject;
 
 };
-#endif // ! __AB_RCT_DEMO_H__
+#endif // ! __RCT_H__

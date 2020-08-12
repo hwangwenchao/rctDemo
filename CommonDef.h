@@ -1,5 +1,5 @@
-#ifndef __AB_RCT_COMMON_H__
-#define __AB_RCT_COMMON_H__
+#ifndef __RCT_COMMON_Def_H__
+#define __RCT_COMMON_Def_H__
 
 
 #define CHK_HRES(op) \

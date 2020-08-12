@@ -5,12 +5,12 @@
 #include <stdlib.h>
 #include <initguid.h>
 #include <virtdisk.h>
-#include "abRctDemo.h"
+#include "Rct.h"
 using namespace std;
 
 int main(void)
 {
-	abRctDemo* rct = new abRctDemo();
+	Rct* rct = new Rct();
 
 	rct->connectWmiNamespace();
 	//step 1: create snapshot

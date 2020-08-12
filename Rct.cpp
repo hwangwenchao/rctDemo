@@ -2,8 +2,8 @@
 #include <virtdisk.h>
 #include <tchar.h>
 #include <comdef.h>
-#include "abRctCommon.h"
-#include "abRctDemo.h"
+#include "CommonDef.h"
+#include "Rct.h"
 #include <iostream>
 #include <atlcomcli.h>
 #include <string>
@@ -15,10 +15,10 @@ using namespace std;
 #pragma comment(lib, "wbemuuid.lib")
 #pragma comment(lib, "virtdisk.lib")
 
-abRctDemo::abRctDemo()
+Rct::Rct()
 	: m_pWbemLocator(NULL)
 	, m_pWbemServices(NULL)
-	,m_pWbemClassObject(NULL)
+	, m_pWbemClassObject(NULL)
 
 {
 	try {
@@ -28,7 +28,7 @@ abRctDemo::abRctDemo()
 		// 创建实例
 		createComInstance();
 	}
-	catch (abRctDemo &e) {
+	catch (Rct &e) {
 		releaseResource();
 		throw exception(_T("Failed to create  instance of  wmi."));
 	}
@@ -38,14 +38,14 @@ abRctDemo::abRctDemo()
 	}
 }
 
-abRctDemo::~abRctDemo()
+Rct::~Rct()
 {
 	releaseResource();
 }
 
 
 void
-abRctDemo::initComComponent()
+Rct::initComComponent()
 {
 	HRESULT hres;
 
@@ -86,7 +86,7 @@ abRctDemo::initComComponent()
 }
 
 void
-abRctDemo::createComInstance()
+Rct::createComInstance()
 {
 	// 对com进行标准调用后，需要通过调用
 	HRESULT hres;
@@ -105,7 +105,7 @@ abRctDemo::createComInstance()
 }
 
 void
-abRctDemo::connectWmiNamespace()
+Rct::connectWmiNamespace()
 {
 	HRESULT hres;
 	BSTR wmiNamespace;
@@ -144,7 +144,7 @@ abRctDemo::connectWmiNamespace()
 }
 
 IEnumWbemClassObject*
-abRctDemo::doExecQuery(string sql)
+Rct::doExecQuery(string sql)
 {
 
 	HRESULT hres;
@@ -181,14 +181,14 @@ abRctDemo::doExecQuery(string sql)
 }
 
 void
-abRctDemo::releaseCom()
+Rct::releaseCom()
 {
 	// 释放com资源
 	CoUninitialize();
 }
 
 void
-abRctDemo::releaseResource()
+Rct::releaseResource()
 {
 	try {
 		if (m_pWbemLocator) {
@@ -212,7 +212,7 @@ abRctDemo::releaseResource()
 }
 
 void
-abRctDemo::createSnapshot(LPCWSTR vmName)
+Rct::createSnapshot(LPCWSTR vmName)
 {
 	HRESULT hr;
 
@@ -536,7 +536,7 @@ abRctDemo::createSnapshot(LPCWSTR vmName)
 }
 
 void
-abRctDemo::convertCheckpoint()
+Rct::convertCheckpoint()
 {
 	HRESULT hr;
 
@@ -752,7 +752,7 @@ abRctDemo::convertCheckpoint()
 	}
 }
 #if 0
-CComBSTR abRctDemo::GetStrProperty(PCWSTR pPropertyName, IWbemClassObject *pObject=NULL)
+CComBSTR Rct::GetStrProperty(PCWSTR pPropertyName, IWbemClassObject *pObject=NULL)
 {
 	VARIANT value;
 	::VariantInit(&value);
@@ -764,7 +764,7 @@ CComBSTR abRctDemo::GetStrProperty(PCWSTR pPropertyName, IWbemClassObject *pObje
 }
 
 void 
-abRctDemo::getProperty(PCWSTR pPropertyName,
+Rct::getProperty(PCWSTR pPropertyName,
 	LPVARIANT pValue,
 	UINT type,
 	IWbemClassObject *pObject)
@@ -784,7 +784,7 @@ abRctDemo::getProperty(PCWSTR pPropertyName,
 }
 
 void 
-abRctDemo::getMethodParams(LPCWSTR pObjectPath,
+Rct::getMethodParams(LPCWSTR pObjectPath,
 	LPCWSTR pMethodName,
 	IWbemClassObject **ppInParams)
 {
@@ -797,7 +797,7 @@ abRctDemo::getMethodParams(LPCWSTR pObjectPath,
 }
 
 void 
-abRctDemo::waitForJobCompletion(IWbemClassObject *pOutParameters)
+Rct::waitForJobCompletion(IWbemClassObject *pOutParameters)
 {
 	const DWORD ProgressPeriod = 500;
 
@@ -846,7 +846,7 @@ abRctDemo::waitForJobCompletion(IWbemClassObject *pOutParameters)
 #endif
 
 HRESULT 
-abRctDemo::getRelevance(PWSTR sAssociatePath, PWSTR sResultClass, IWbemClassObject** ppResultObject) 
+Rct::getRelevance(PWSTR sAssociatePath, PWSTR sResultClass, IWbemClassObject** ppResultObject) 
 {
 	CStringW sqlSentence;
 	sqlSentence.Format(L"associators of {%s} where ResultClass = %s", sAssociatePath, sResultClass);
@@ -868,7 +868,7 @@ abRctDemo::getRelevance(PWSTR sAssociatePath, PWSTR sResultClass, IWbemClassObje
 	return hr;
 }
 void
-abRctDemo::retrieveChangeBlocks(PCWSTR virtualDiskPath)
+Rct::retrieveChangeBlocks(PCWSTR virtualDiskPath)
 {
 	cout << "##Step 3: Retrieve change blocks..." << endl;
 	cout << "-----------------------------------------------------------" << endl;
