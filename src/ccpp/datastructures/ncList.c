@@ -68,3 +68,13 @@ void Insert(ElementType X, List L, Position P)
     P->next = tempCell;
     NC_TRACE_EXIT
 }
+
+void Display(List L)
+{
+    NC_TRACE_ENTRY
+    while(L!=NULL){
+        printf("Element:%d\n", L->element);
+        L=L->next;
+    }
+    NC_TRACE_EXIT
+}

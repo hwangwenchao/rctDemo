@@ -4,6 +4,9 @@
 
 typedef int ElementType;
 
+#define CUTOFF_RANGE 3
+#define SPACE_SIZE 10
+
 #define NC_TRACE_ENTRY { \
     printf("%s() start\n", __FUNCTION__);\
 }
