@@ -1,52 +1,35 @@
+#include "ncStack.h"
+#include "ncQueue.h"
 #include "ncShreddedCommon.h"
 #include <iostream>
 #include <vector>
 
-std::vector<Box> GetBindingBox(int m, int n, int pic[][9])
+template<typename T>
+bool CheckEqual(const T& left, const T& right)
 {
-
-    std::vector<Box> boxes;
-    Box box;
-    int boxLength = 0;
-    int boxWidth = 0;
-    for(int i=0; i<m; i++)
+    if(left == right)
     {
-        for(int j=0; j<n; j++)
-        {
-            //std::cout<<pic[i][j]<<std::endl;
-            //std::cout<<pic[i][j]<<" ";
-            if(i>0 && j>0 && pic[i][j] != pic[i-1][j]
-                          && pic[i][j] != pic[i+1][j]
-                          && pic[i][j] != pic[i][j-1]
-                          && pic[i][j] != pic[i][j+1])
-            {
-                box.m_minX = i;
-                box.m_minY = j;
-                box.m_maxX = i;
-                box.m_maxY = j;
-                boxes.push_back(box);
-            }
-            //
-            if(pic[i][j] == 1 || pic[i][j+1] == 1)
-            {
-                boxLength +=1;
-            }
-        }
-        //std::cout<<std::endl;
+        std::cout<<"successfully delete node~"<<std::endl;
+        return true;
+    }
+    else
+    {
+        std::cout<<"Failed to delete node!"<<std::endl;
+        return false;
     }
 
-    return boxes;
-
+    return false;
 }
 
 #ifdef __WINDOWS__
-int _tmain(int argc, char* argv[])
+int _tmain(int argc, _TCHAR* argv[])
 #else
 int main(int argc, char* argv[])
 #endif
 {
     std::cout<<"------------start--------------"<<std::endl;
 
+    /*
     int pic[4][9] = {
         {0, 0, 0, 1, 1, 1, 0, 1, 1},
         {0, 0, 1, 1, 1, 0, 0, 0, 1},
@@ -59,7 +42,25 @@ int main(int argc, char* argv[])
         std::cout<<"(("<<boxes.at(i).m_minX<<","<<boxes.at(i).m_minY<<"),";
         std::cout<<"("<<boxes.at(i).m_maxX<<", "<<boxes.at(i).m_maxY<<"))";
     }
+    */
 
+    //implement the queue with tow stack;
+    // CQueue<int> queue;
+    // queue.push(3);
+    // queue.push(5232);
+
+    // queue.pop();
+
+    // CheckEqual(3, testNode);
+
+    // implement the stach with two queue
+    CStack<int> stack;
+    stack.push(3);
+    stack.push(5232);
+
+    stack.pop();
+    bool isEmpty = stack.empty();
+    std::cout<<"delRes:"<<isEmpty<<std::endl;
 
     return 0;
 }

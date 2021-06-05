@@ -7,6 +7,7 @@
 #endif
 
 #include <iostream>
+#include <vector>
 
 #define NC_TRACE_ENTRY { \
     std::cout<<__PRETTY_FUNCTION__<<std::endl;\
@@ -31,6 +32,8 @@ struct Box
     {
     }
 };
+
+std::vector<Box> GetBindingBox(int m, int n, int pic[][9]);
 
 
 #endif
