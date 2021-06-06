@@ -1,25 +1,31 @@
+#include "ncFibonacci.h"
 #include "ncStack.h"
 #include "ncQueue.h"
 #include "ncShreddedCommon.h"
 #include <iostream>
 #include <vector>
 
-template<typename T>
-bool CheckEqual(const T& left, const T& right)
-{
-    if(left == right)
-    {
-        std::cout<<"successfully delete node~"<<std::endl;
-        return true;
-    }
-    else
-    {
-        std::cout<<"Failed to delete node!"<<std::endl;
-        return false;
-    }
+#ifndef __WINDOWS__
+#include <time.h>
+#include <chrono>
+#endif
 
-    return false;
+#ifndef __WINDOWS__
+int64_t GetCurrentTime()
+{
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return tv.tv_sec*1000 + tv.tv_sec/1000;
 }
+
+int64_t GetTimeStamp()
+{
+    std::chrono::time_point<std::chrono::system_clock, std::chrono::milliseconds> tp = std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::system_clock::now());//获取当前时间点
+    std::time_t timestamp =  tp.time_since_epoch().count(); //计算距离1970-1-1,00:00的时间长度
+
+    return timestamp;
+}
+#endif
 
 #ifdef __WINDOWS__
 int _tmain(int argc, _TCHAR* argv[])
@@ -54,13 +60,21 @@ int main(int argc, char* argv[])
     // CheckEqual(3, testNode);
 
     // implement the stach with two queue
-    CStack<int> stack;
-    stack.push(3);
-    stack.push(5232);
+    // CStack<int> stack;
+    // stack.push(3);
+    // stack.push(5232);
 
-    stack.pop();
-    bool isEmpty = stack.empty();
-    std::cout<<"delRes:"<<isEmpty<<std::endl;
+    // stack.pop();
+    // bool isEmpty = stack.empty();
+    // std::cout<<"delRes:"<<isEmpty<<std::endl;
+
+    // Recursive
+    long long resFibonacci = GetFibonacciSequence(50);
+    #ifndef __WINDOWS__
+    long long startTime = GetCurrentTime();
+    std::cout<<"startTime:"<<startTime<<std::endl;
+    #endif
+    std::cout<<"resFibonacci:"<<resFibonacci<<std::endl;
 
     return 0;
 }
