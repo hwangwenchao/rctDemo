@@ -1,3 +1,4 @@
+#include "ncSortAlgorithm.h"
 #include "ncFibonacci.h"
 #include "ncStack.h"
 #include "ncQueue.h"
@@ -6,7 +7,7 @@
 #include <vector>
 
 #ifndef __WINDOWS__
-#include <time.h>
+#include <sys/time.h>
 #include <chrono>
 #endif
 
@@ -69,12 +70,23 @@ int main(int argc, char* argv[])
     // std::cout<<"delRes:"<<isEmpty<<std::endl;
 
     // Recursive
-    long long resFibonacci = GetFibonacciSequence(50);
-    #ifndef __WINDOWS__
-    long long startTime = GetCurrentTime();
-    std::cout<<"startTime:"<<startTime<<std::endl;
-    #endif
-    std::cout<<"resFibonacci:"<<resFibonacci<<std::endl;
+    // long long resFibonacci = GetFibonacciSequence(50);
+    // #ifndef __WINDOWS__
+    // long long startTime = GetCurrentTime();
+    // std::cout<<"startTime:"<<startTime<<std::endl;
+    // #endif
+    // std::cout<<"resFibonacci:"<<resFibonacci<<std::endl;
 
+    // sort
+    std::vector<int> arr = {100, 23, 4, 22, 55322, 543, 212, 55521};
+    Bubble(arr);
+    //Quickly(arr, 0, arr.size());
+    for(unsigned i=0; i<arr.size(); i++)
+    {
+        std::cout<<arr[i]<<" ";
+    }
+    std::cout<<std::endl;
+
+    std::cout<<"-------------end---------------"<<std::endl;
     return 0;
 }

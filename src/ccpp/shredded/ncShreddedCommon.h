@@ -9,6 +9,8 @@
 #include <iostream>
 #include <vector>
 
+const int ARR_LENGTH = 10;
+
 #define NC_TRACE_ENTRY { \
     std::cout<<__PRETTY_FUNCTION__<<std::endl;\
 }
