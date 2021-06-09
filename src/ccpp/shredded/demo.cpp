@@ -3,6 +3,7 @@
 #include "ncStack.h"
 #include "ncQueue.h"
 #include "ncShreddedCommon.h"
+#include "ncBalabala.h"
 #include <iostream>
 #include <vector>
 
@@ -78,14 +79,22 @@ int main(int argc, char* argv[])
     // std::cout<<"resFibonacci:"<<resFibonacci<<std::endl;
 
     // sort
-    std::vector<int> arr = {100, 23, 4, 22, 55322, 543, 212, 55521};
-    Bubble(arr);
-    //Quickly(arr, 0, arr.size());
-    for(unsigned i=0; i<arr.size(); i++)
-    {
-        std::cout<<arr[i]<<" ";
-    }
-    std::cout<<std::endl;
+    // std::vector<int> arr = {100, 23, 4, 22, 55322, 543, 212, 55521};
+    // Bubble(arr);
+    // //Quickly(arr, 0, arr.size());
+    // for(unsigned i=0; i<arr.size(); i++)
+    // {
+    //     std::cout<<arr[i]<<" ";
+    // }
+    // std::cout<<std::endl;
+
+
+    const char* srcStr = "Aini";
+    char des[STEP_LENGTH] = {0};
+    //StrCpy(des, srcStr);
+    //MemCpy(des, srcStr, 0);
+    memcpy(des, srcStr, 0);
+    std::cout<<"des:"<<des<<std::endl;
 
     std::cout<<"-------------end---------------"<<std::endl;
     return 0;

@@ -2,6 +2,8 @@
 
 #include <vector>
 
+const int STEP_LENGTH = 3;
+
 void Bubble(std::vector<int> &arr)
 {
     unsigned length = arr.size();
@@ -49,4 +51,52 @@ void Quickly(std::vector<int>& arr, int start, int end)
     Quickly(arr, start, i-1);
     Quickly(arr, i+1, end);
 
+}
+
+int Median3(std::vector<int> &arr, int start, int end)
+{
+    int mid = (start+end)/2;
+    if(arr[start] > arr[mid])
+    {
+        std::swap(arr[start], arr[mid]);
+    }
+    if(arr[start] > arr[end])
+    {
+        std::swap(arr[start], arr[end]);
+    }
+    if(arr[mid] > arr[end])
+    {
+        std::swap(arr[mid], arr[end]);
+    }
+
+    std::swap(arr[mid], arr[end-1]);
+
+    return arr[end-1];
+}
+
+void QuicklyEx(std::vector<int>& arr, int start, int end)
+{
+    if(start+STEP_LENGTH <= end)
+    {
+        int pivot = Median3(arr, start, end);
+        int i = start;
+        int j = end - 1;
+        for(;;)
+        {
+            while(arr[++j] < pivot)
+                ;
+            while(arr[++i] > pivot)
+                ;
+            if(i<j)
+            {
+                std::swap(arr[i], arr[j]);
+            }
+            else
+                break;
+        }
+        std::swap(arr[i], arr[j-1]);
+
+        QuicklyEx(arr, start, i-1);
+        QuicklyEx(arr, i+1, end);
+    }
 }
